@@ -1,0 +1,72 @@
+<%- include('../layouts/boilerplate') %>
+
+    <!-- EMPTY CONTAINER FOR SPACE -->
+    <div class="container text-center py-5 mt-5"></div>
+
+    <div class="row">
+        <h1 class="text-center mb-5">Edit Model</h1>
+        <div class="col-6 offset-3">
+
+            <form action="/surfboards/<%= surfboard._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label class=" form-label" for="category">Category</label>
+                    <select class="form-control" name="surfboard[category]" id="category">
+                        <option value="short" <%=surfboard.category==='short' ? 'selected' : '' %>>short</option>
+                        <option value="mid" <%=surfboard.category==='mid' ? 'selected' : '' %>>mid</option>
+                        <option value="long" <%=surfboard.category==='long' ? 'selected' : '' %>>long</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" value="<%= surfboard.title %>"
+                        name="surfboard[title]">
+                </div>
+                <div>
+                    <label class="form-label" for="description">Description</label>
+                    <input class="form-control" type="text" id="description" value="<%= surfboard.description %>"
+                        name="surfboard[description]">
+                </div>
+                <div>
+                    <label class="form-label" for="length">Length</label>
+                    <input class="form-control" type="text" id="length" value="<%= surfboard.length %>"
+                        name="surfboard[length]">
+                </div>
+                <div>
+                    <label class="form-label mt-2" for="image">Add Image</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                </div>
+
+
+                <div class="mb-5">
+                    <% for(let img of surfboard.image) { %>
+                        <img src="<%= img.url %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="currentImage" name="deleteImage" value="<%= img.filename %>">
+                        </div>
+                        <label for="currentImage">Delete image?</label>
+                        <% } %>
+                </div>
+
+
+                <button type="button submit" class="btn btn-success mt-3 mb-3">Confirm & Update</button>
+            </form>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+
+                    <a href="/surfboards">
+                        <button class="btn btn-dark">Back to Surfboards</button>
+                    </a>
+
+                    <a href="/surfboards/<%= surfboard._id %>">
+                        <button class="btn btn-danger ms-2">Delete</button>
+                    </a>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>

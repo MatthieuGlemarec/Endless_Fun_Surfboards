@@ -1,0 +1,44 @@
+<%- include('../layouts/boilerplate') %>
+
+    <!-- EMPTY CONTAINER FOR SPACE -->
+    <div class="container text-center py-5 mt-5"></div>
+
+    <div class="row">
+        <h1 class="text-center mb-5 delete-board-header">delete Model?</h1>
+        <div class="col-6 offset-3">
+
+
+            <h1 class="text-center mb-5">
+                <%= surfboard.title %>
+            </h1>
+            <% for(let img of surfboard.image) { %>
+                <img src="<%= img.url %>" class="img-thumbnail" alt="">
+                <% } %>
+                    <p class="text-center mb-5">
+                        <%= surfboard.description %>
+                    </p>
+                    <h3 class="text-center mb-5">
+                        <%= surfboard.length %>
+                    </h3>
+
+                    <h3 class="text-center delete-board-text">are you sure you want to permanently delete this model?
+                    </h3>
+
+                    <div class="text-center mb-5">
+                        <a href="/surfboards/<%= surfboard._id %>/edit">
+                            <button type="button submit" class="btn btn-warning mt-5">cancel</button>
+                        </a>
+
+                        <form name="deleteModel" action="/surfboards/<%= surfboard._id %>/?_method=DELETE"
+                            method="POST">
+                            <button type="button submit" class="btn btn-danger mt-5">confirm & delete</button>
+                        </form>
+                    </div>
+
+        </div>
+    </div>
+
+
+
+
+    <%- include('../partials/footer'); %>

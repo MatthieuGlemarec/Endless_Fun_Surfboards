@@ -1,0 +1,41 @@
+<%- include('../layouts/boilerplate') %>
+
+    <!-- EMPTY CONTAINER FOR SPACE -->
+    <div class="container text-center py-5 mt-5"></div>
+
+    <div class="row">
+        <h1 class="text-center mb-5">Create New Model</h1>
+        <div class="col-6 offset-3">
+
+            <form class="mb-5" action="/surfboards" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label class="form-label" for="category">Category</label>
+                    <select class="form-control" name="surfboard[category]" id="category">
+                        <option value="short">short</option>
+                        <option value="mid">mid</option>
+                        <option value="long">long</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="surfboard[title]">
+                </div>
+                <div>
+                    <label class="form-label" for="description">Description</label>
+                    <input class="form-control" type="text" id="description" name="surfboard[description]">
+                </div>
+                <div>
+                    <label class="form-label" for="length">Length</label>
+                    <input class="form-control" type="text" id="length" name="surfboard[length]">
+                </div>
+                <div>
+                    <label class="form-label mt-2" for="image">Add Image</label>
+                    <input class="form-control" type="file" id="" name="image">
+                </div>
+                <button type="button submit" class="btn btn-success mt-5">Add Model</button>
+            </form>
+            <form action="/surfboards">
+                <button type="submit" class="btn btn-sm btn-dark">Back to Surfboards</button>
+            </form>
+        </div>
+    </div>

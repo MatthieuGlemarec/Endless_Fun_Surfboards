@@ -1,0 +1,24 @@
+<%- include('../layouts/boilerplate') %>
+
+    <!-- EMPTY CONTAINER FOR SPACE -->
+    <div class="container text-center py-5 mt-5"></div>
+
+    <div class="row">
+        <h1 class="text-center mb-5">Login</h1>
+        <div class="col-6 offset-3">
+            <form class="validated-form mb-5" action="/admin" method="POST">
+                <div>
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" type="text" id="username" name="username">
+                </div>
+                <div>
+                    <label class="form-label" for="Password">Password</label>
+                    <input class="form-control" type="password" id="Password" name="password">
+                </div>
+                <button type="button submit" class="btn btn-success mt-5">Login</button>
+            </form>
+            <form action="/">
+                <button type="submit" class="btn btn-outline-dark">Back to home</button>
+            </form>
+        </div>
+    </div>

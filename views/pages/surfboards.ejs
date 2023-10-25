@@ -1,0 +1,173 @@
+<%- include('../layouts/boilerplate') %>
+
+
+    <!-- EMPTY CONTAINER FOR SPACE -->
+    <div class="container text-center py-5 mt-5"></div>
+
+    <!-- BOARD ICON LINK SECTION -->
+    <section>
+        <div class="container text-center py-5 mb-5">
+            <div class="row row-cols-3 image-container">
+
+                <div class="">
+                    <a class="board-icon-text" aria-current="page" href="#short-models">
+                        <img class="board-icon"
+                            src="https://res-console.cloudinary.com/dnqquvrge/thumbnails/transform/v1/image/upload/Y19saW1pdCxoXzE2MDAsd18xNjAwLGZfanBnLGZsX2xvc3N5LmFueV9mb3JtYXQucHJlc2VydmVfdHJhbnNwYXJlbmN5LnByb2dyZXNzaXZl/v1/RW5kbGVzc0Z1bi9sZ2J5MmYxaDBvZXljZ3Q0dWoyag==/template_primary"
+                            alt="Image 2">
+                        <p class="mt-3">short</p>
+                    </a>
+
+                </div>
+                <div class="">
+                    <a class="board-icon-text" aria-current="page" href="#mid-models">
+                        <img class="board-icon"
+                            src="https://res-console.cloudinary.com/dnqquvrge/thumbnails/transform/v1/image/upload/Y19saW1pdCxoXzE2MDAsd18xNjAwLGZfanBnLGZsX2xvc3N5LmFueV9mb3JtYXQucHJlc2VydmVfdHJhbnNwYXJlbmN5LnByb2dyZXNzaXZl/v1/RW5kbGVzc0Z1bi9lMnExcHhod2ZiM254d2d4eTFjdw==/template_primary"
+                            alt="Image 2">
+                        <p class="mt-3">mid</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a class="board-icon-text" aria-current="page" href="#long-models">
+                        <img class="board-icon"
+                            src="https://res-console.cloudinary.com/dnqquvrge/thumbnails/transform/v1/image/upload/Y19saW1pdCxoXzE2MDAsd18xNjAwLGZfanBnLGZsX2xvc3N5LmFueV9mb3JtYXQucHJlc2VydmVfdHJhbnNwYXJlbmN5LnByb2dyZXNzaXZl/v1/RW5kbGVzc0Z1bi9xcDVobHI2anozMWZ0aWlzcnQ5bQ==/template_primary"
+                            alt="Image 2">
+                        <p class="mt-3">long</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM ORDER BANNER -->
+    <section class="custom-order-banner mb-5">
+        <div class="container-fluid text-center mt-5 mb-5">
+            <div class="row align-items-center">
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class=" text-center pb-5">
+                            <h2 class="contact-banner-header">Let's make something</h2>
+                            <a class="contact-banner-link" href="/contact">
+                                Get in touch to discuss custom orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHORTBOARD MODELSECTION-->
+    <section id="short-models">
+        <div class="container text-center py-5 mb-5">
+            <a class="model-section-header" href="#short-models">
+                short
+            </a>
+            <div class="image-container py-5">
+                <ul class="list-group list-group-flush list-group-horizontal">
+                    <% for (let surfboard of surfboards) {%>
+                        <% if (surfboard.category==='short' ) { %>
+                            <li class="list-group-item border-0 p-5 flex-fill">
+
+                                <% for(let img of surfboard.image) { %>
+                                    <img class="model-image" src="<%= img.url %>" alt="">
+                                    <% } %>
+                                        <h1 class="model-title mt-5 mb-3">
+                                            <%= surfboard.title %>
+                                        </h1>
+                                        <p class="model-description">
+                                            <%= surfboard.description %>
+                                        </p>
+                                        <h3 class="model-lenght">
+                                            <%= surfboard.length %>
+                                        </h3>
+                                        <% if(User) {%>
+                                            <form action="/surfboards/<%= surfboard._id %>/edit">
+                                                <button type="submit" class="btn btn-outline-warning">Edit</button>
+                                            </form>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <% } %>
+                            </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- MIDLENGTH MODELSECTION-->
+    <section id="mid-models">
+        <div class="container text-center py-5 mb-5">
+            <a class="model-section-header" href="#mid-models">
+                mid
+            </a>
+            <div class=" image-container py-5">
+                <ul class="list-group list-group-flush list-group-horizontal">
+                    <% for (let surfboard of surfboards) {%>
+                        <% if (surfboard.category==='mid' ) { %>
+                            <li class="list-group-item border-0 p-5 flex-fill">
+
+                                <% for(let img of surfboard.image) { %>
+                                    <img class="model-image" src="<%= img.url %>" alt="">
+                                    <% } %>
+                                        <h1 class="model-title mt-5 mb-3">
+                                            <%= surfboard.title %>
+                                        </h1>
+                                        <p class="model-description">
+                                            <%= surfboard.description %>
+                                        </p>
+                                        <h3 class="model-lenght">
+                                            <%= surfboard.length %>
+                                        </h3>
+                                        <% if(User) {%>
+                                            <form action="/surfboards/<%= surfboard._id %>/edit">
+                                                <button type="submit" class="btn btn-outline-warning">Edit</button>
+                                            </form>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <% } %>
+                            </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- LONGBOARD MODELSECTION-->
+    <section id="long-models">
+        <div class="container text-center py-5 mb-5">
+            <a class="model-section-header" href="#long-models">
+                long
+            </a>
+            <div class="image-container py-5">
+                <ul class="list-group list-group-flush list-group-horizontal">
+                    <% for (let surfboard of surfboards) {%>
+                        <% if (surfboard.category==='long' ) { %>
+                            <li class="list-group-item border-0 p-5 flex-fill">
+
+                                <% for(let img of surfboard.image) { %>
+                                    <img class="model-image img-fuild" src="<%= img.url %>" alt="">
+                                    <% } %>
+                                        <h1 class="model-title mt-5 mb-3">
+                                            <%= surfboard.title %>
+                                        </h1>
+                                        <p class="model-description">
+                                            <%= surfboard.description %>
+                                        </p>
+                                        <h3 class="model-length">
+                                            <%= surfboard.length %>
+                                        </h3>
+                                        <% if(User) {%>
+                                            <form action="/surfboards/<%= surfboard._id %>/edit">
+                                                <button type="submit" class="btn btn-outline-warning">Edit</button>
+                                            </form>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <% } %>
+                            </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+
+    <%- include('../partials/footer'); %>
