@@ -16,9 +16,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const MongoStore = require('connect-mongo');
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/endlessfun'
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/endlessfun', { useNewUrlParser: true })
+mongoose.connect(dbUrl, { useNewUrlParser: true })
     .then(() => {
         console.log('MONGO CONNECTION OPEN!')
     })
@@ -26,6 +27,33 @@ mongoose.connect('mongodb://127.0.0.1:27017/endlessfun', { useNewUrlParser: true
         console.log('MONGO ERROR!!!!')
         console.log(err)
     });
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: process.env.SESSION_SECRET
+    }
+});
+
+
+store.on("error", function (e) {
+    console.log("SESSION ERROR", e)
+});
+
+
+const sessionConfig = {
+    store,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+};
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -39,16 +67,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const sessionConfig = {
-    secret: 'thisshouldbeabettersecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-};
+
 app.use(session(sessionConfig));
 app.use(flash());
 
