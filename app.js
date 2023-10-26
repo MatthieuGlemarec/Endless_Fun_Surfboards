@@ -87,10 +87,17 @@ app.use((req, res, next) => {
 });
 
 
-app.get('/newuser', async (req, res) => {
-    const user = new User({ email: 'matthieuglemarec@gmail.com', username: 'bob' });
-    const newUser = await User.register(user, 'bob');
-    res.send(newUser);
+const seedDB = async () => {
+    await User.deleteMany({});
+    const user = new User({
+        email: 'endlessfunsurfboards@gmail.com',
+        username: 'admin'
+    });
+    const newUser = await User.register(user, 'admin69');
+    await newUser.save()
+}
+seedDB().then(() => {
+    mongoose.connection.close()
 });
 
 
