@@ -87,20 +87,6 @@ app.use((req, res, next) => {
 });
 
 
-const seedDB = async () => {
-    await User.deleteMany({});
-    const user = new User({
-        email: 'endlessfunsurfboards@gmail.com',
-        username: 'admin'
-    });
-    const newUser = await User.register(user, 'admin69');
-    await newUser.save()
-}
-seedDB().then(() => {
-    mongoose.connection.close()
-});
-
-
 app.use('/surfboards', surfboards);
 
 app.get('/', (req, res) => {
