@@ -45,6 +45,7 @@ router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
     };
     await surfboard.updateOne({ $pull: { image: { filename: { $in: req.body.deleteImage } } } })
     if (req.file) {
+
         surfboard.image = { url: req.file.path, filename: req.file.filename }
     };
     await surfboard.save();
